@@ -115,7 +115,7 @@ if __name__ == "__main__":
 		src.setARP(ip=MAGIC_IP, mac=MAGIC_MAC)
 		src.cmd("ping", "-c1", "-W1", MAGIC_IP)
 
-	px = Prox(mn.getNodeByName("prox"), "ptprox.log")
+	px = Prox(mn.getNodeByName("prox"), "proxy.log")
 	px.start()
 	mn.interact()
 
