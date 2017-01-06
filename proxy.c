@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 	bpf_u_int32 net;                   /* Our IP */
 
 	if (argc != 2) {
-		printf("usage: ptprox <dev>\n");
+		printf("usage: proxy <dev>\n");
 		return EXIT_FAILURE;
 	} else {
 		dev = argv[1];
