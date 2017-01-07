@@ -38,19 +38,71 @@ Transparent HTTP Proxy App developed by Floodlight
   2. Launching Mininet and creating the whole virtual network with specified topological structure including Open vswitch and hosts
   3. Compiling the proxy.c and running the compiled proxy in virtual prox host
  
-3. If everything works as intended, you are prompted to the mininet console and you can do following operations:
+3. If everything works as intended, you are prompted to the mininet console and you can do following operations to check the network:
 
-  1. h1 ping h3
-  2. h2 ping h3
-  3. h1 ping h2
-  4. h1 ping prox
+
+  * nodes
+  * net
+  * h1 ping h3
+  * h2 ping h3
+  * h1 ping h2
+  * h1 ping prox
   
-  
+  Follwing example console log shows the results as expeceted: 
   
   ```
   peng@peng-virtual-machine:~/Downloads/TransHttpProxy$ sudo ./run.py
   proxy is running
-  mininet> 
+  mininet> nodes
+  available nodes are: 
+  c0 h1 h2 h3 prox s1 s2 s3
+  mininet> net
+  h1 h1-eth0:s1-eth1
+  h2 h2-eth0:s1-eth2
+  h3 h3-eth0:s3-eth1
+  prox prox-eth0:s2-eth1
+  s1 lo:  s1-eth1:h1-eth0 s1-eth2:h2-eth0 s1-eth3:s2-eth2
+  s2 lo:  s2-eth1:prox-eth0 s2-eth2:s1-eth3 s2-eth3:s3-eth2
+  s3 lo:  s3-eth1:h3-eth0 s3-eth2:s2-eth3
+  c0
+  mininet> h1 ping h3
+  PING 10.0.0.3 (10.0.0.3) 56(84) bytes of data.
+  64 bytes from 10.0.0.3: icmp_seq=2 ttl=64 time=1634 ms
+  64 bytes from 10.0.0.3: icmp_seq=3 ttl=64 time=1629 ms
+  64 bytes from 10.0.0.3: icmp_seq=4 ttl=64 time=1629 ms
+  64 bytes from 10.0.0.3: icmp_seq=5 ttl=64 time=1629 ms
+  ^C
+  --- 10.0.0.3 ping statistics ---
+  7 packets transmitted, 4 received, 42% packet loss, time 6016ms
+  rtt min/avg/max/mdev = 1629.310/1630.597/1634.350/2.166 ms, pipe 2
+  mininet> h2 ping h3
+  PING 10.0.0.3 (10.0.0.3) 56(84) bytes of data.
+  64 bytes from 10.0.0.3: icmp_seq=2 ttl=64 time=1996 ms
+  64 bytes from 10.0.0.3: icmp_seq=3 ttl=64 time=1996 ms
+  64 bytes from 10.0.0.3: icmp_seq=4 ttl=64 time=1993 ms
+  64 bytes from 10.0.0.3: icmp_seq=5 ttl=64 time=1993 ms
+  64 bytes from 10.0.0.3: icmp_seq=6 ttl=64 time=1993 ms
+  ^C
+  --- 10.0.0.3 ping statistics ---
+  8 packets transmitted, 5 received, 37% packet loss, time 7014ms
+  rtt min/avg/max/mdev = 1993.094/1994.576/1996.525/2.127 ms, pipe 2
+  mininet> h1 ping h2
+  PING 10.0.0.2 (10.0.0.2) 56(84) bytes of data.
+  64 bytes from 10.0.0.2: icmp_seq=2 ttl=64 time=0.195 ms
+  64 bytes from 10.0.0.2: icmp_seq=3 ttl=64 time=0.074 ms
+  64 bytes from 10.0.0.2: icmp_seq=4 ttl=64 time=0.052 ms
+  64 bytes from 10.0.0.2: icmp_seq=5 ttl=64 time=0.081 ms
+  ^C
+  --- 10.0.0.2 ping statistics ---
+  5 packets transmitted, 4 received, 20% packet loss, time 4007ms
+  rtt min/avg/max/mdev = 0.052/0.100/0.195/0.056 ms
+  mininet> h1 ping prox
+  PING 10.0.0.4 (10.0.0.4) 56(84) bytes of data.
+  ^C
+  --- 10.0.0.4 ping statistics ---
+  9 packets transmitted, 0 received, 100% packet loss, time 8057ms
+
+  mininet> exit
   ```
  
   
