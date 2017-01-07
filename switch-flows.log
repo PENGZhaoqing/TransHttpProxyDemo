@@ -1,0 +1,34 @@
+
+---------------------------------------------------hi ping h3----------------------------------------------------------------------------------------------------------------------
+
+peng@peng-virtual-machine:~$ sudo ovs-ofctl dump-flows s1
+NXST_FLOW reply (xid=0x4):
+ cookie=0x0, duration=9.825s, table=0, n_packets=8, n_bytes=784, idle_timeout=20, idle_age=1, priority=1,ip,in_port=1,dl_src=00:00:00:00:00:01,dl_dst=00:00:00:00:00:03 actions=output:3
+ cookie=0x0, duration=9.825s, table=0, n_packets=7, n_bytes=686, idle_timeout=20, idle_age=0, priority=1,ip,in_port=3,dl_src=00:00:00:00:00:03,dl_dst=00:00:00:00:00:01 actions=output:1
+ cookie=0x0, duration=209.230s, table=0, n_packets=57, n_bytes=6431, idle_age=4, priority=0 actions=CONTROLLER:65535
+peng@peng-virtual-machine:~$ sudo ovs-ofctl dump-flows s2
+NXST_FLOW reply (xid=0x4):
+ cookie=0x0, duration=11.232s, table=0, n_packets=8, n_bytes=784, idle_timeout=20, idle_age=3, priority=1,ip,in_port=2,dl_src=00:00:00:00:00:01,dl_dst=00:00:00:00:00:03 actions=output:1
+ cookie=0x0, duration=11.228s, table=0, n_packets=8, n_bytes=784, idle_timeout=20, idle_age=2, priority=1,ip,in_port=1,dl_src=00:00:00:00:00:01,dl_dst=00:00:00:00:00:03 actions=output:3
+ cookie=0x0, duration=11.228s, table=0, n_packets=8, n_bytes=784, idle_timeout=20, idle_age=2, priority=1,ip,in_port=3,dl_src=00:00:00:00:00:03,dl_dst=00:00:00:00:00:01 actions=output:1
+ cookie=0x0, duration=11.228s, table=0, n_packets=8, n_bytes=784, idle_timeout=20, idle_age=1, priority=1,ip,in_port=1,dl_src=00:00:00:00:00:03,dl_dst=00:00:00:00:00:01 actions=output:2
+ cookie=0x0, duration=210.640s, table=0, n_packets=87, n_bytes=10534, idle_age=6, priority=0 actions=CONTROLLER:65535
+peng@peng-virtual-machine:~$ sudo ovs-ofctl dump-flows s3
+NXST_FLOW reply (xid=0x4):
+ cookie=0x0, duration=12.783s, table=0, n_packets=8, n_bytes=784, idle_timeout=20, idle_age=3, priority=1,ip,in_port=2,dl_src=00:00:00:00:00:01,dl_dst=00:00:00:00:00:03 actions=output:1
+ cookie=0x0, duration=12.783s, table=0, n_packets=8, n_bytes=784, idle_timeout=20, idle_age=3, priority=1,ip,in_port=1,dl_src=00:00:00:00:00:03,dl_dst=00:00:00:00:00:01 actions=output:2
+ cookie=0x0, duration=212.208s, table=0, n_packets=48, n_bytes=5649, idle_age=7, priority=0 actions=CONTROLLER:65535
+
+
+---------------------------------------------------after some time-------------------------------------------------------------------------------------------------------------------------
+
+peng@peng-virtual-machine:~$ sudo ovs-ofctl dump-flows s1
+NXST_FLOW reply (xid=0x4):
+ cookie=0x0, duration=239.717s, table=0, n_packets=59, n_bytes=6581, idle_age=5, priority=0 actions=CONTROLLER:65535
+peng@peng-virtual-machine:~$ sudo ovs-ofctl dump-flows s2
+NXST_FLOW reply (xid=0x4):
+ cookie=0x0, duration=241.463s, table=0, n_packets=91, n_bytes=10834, idle_age=7, priority=0 actions=CONTROLLER:65535
+peng@peng-virtual-machine:~$ sudo ovs-ofctl dump-flows s3
+NXST_FLOW reply (xid=0x4):
+ cookie=0x0, duration=243.040s, table=0, n_packets=50, n_bytes=5799, idle_age=8, priority=0 actions=CONTROLLER:65535
+
