@@ -91,7 +91,7 @@ public class TransHttpProxyDemo implements IFloodlightModule, IOFMessageListener
 		floodlightProvider = context.getServiceImpl(IFloodlightProviderService.class);
 		routingEngine = context.getServiceImpl(IRoutingService.class);
 		switchEngine = context.getServiceImpl(IOFSwitchService.class);
-		log = LoggerFactory.getLogger("AdvNetRouter");
+		log = LoggerFactory.getLogger("TransHttpProxyDemo");
 		mac_to_switchport = new HashMap<MacAddress, SwitchPort>();
 	}
 
