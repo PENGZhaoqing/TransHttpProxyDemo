@@ -36,5 +36,23 @@ Transparent HTTP Proxy App developed by Floodlight
 
   1. Trying to connect to the controller with socket (localhost,port=6653), and waiting until success
   2. Launching Mininet and creating the whole virtual network with specified topological structure including Open vswitch and hosts
-  3. Compiling the proxy.c and running the compiled proxy in prox host
+  3. Compiling the proxy.c and running the compiled proxy in virtual prox host
+ 
+3. If everything works as intended, you are prompted to the mininet console and you can do following operations:
+
+  1. h1 ping h3
+  2. h2 ping h3
+  3. h1 ping h2
+  4. h1 ping prox
+  
+  
+  
+  ```
+  peng@peng-virtual-machine:~/Downloads/TransHttpProxy$ sudo ./run.py
+  proxy is running
+  mininet> 
+  ```
+ 
+  
+  
   
