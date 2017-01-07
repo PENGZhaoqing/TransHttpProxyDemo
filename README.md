@@ -14,7 +14,7 @@ Transparent HTTP Proxy App developed by Floodlight
 * switch-flows.log: the log file of the ovs switch flows table
 
 
-## Usage
+## Runing Guide
 
 1. Run the floodlight project in eclipse to start the controller, which is listening for Openflow switches on [0.0.0.0]:6653, you may find the useful tutorial of running floodlight [here](https://floodlight.atlassian.net/wiki/display/floodlightcontroller/Installation+Guide#suk=)
 
@@ -37,8 +37,10 @@ Transparent HTTP Proxy App developed by Floodlight
   1. Trying to connect to the controller with socket (localhost,port=6653), and waiting until success
   2. Launching Mininet and creating the whole virtual network with specified topological structure including Open vswitch and hosts
   3. Compiling the proxy.c and running the compiled proxy in virtual prox host
+  
+## Experiment and results
  
-3. If everything works as intended, you are prompted to the mininet console and you can do following operations to check the network:
+1. If everything works as intended, you are prompted to the mininet console and you can do following operations to check the network:
 
 
   * nodes
@@ -105,6 +107,42 @@ Transparent HTTP Proxy App developed by Floodlight
   mininet> exit
   ```
  
+  2. Cat the proxy.log, we can find the prox host receive the packages from other hosts and then simply sends out all packets it receives on the same port
   
+   ```
+   10.0.0.1 -->        10.0.0.3  [ICMP]
+   10.0.0.3 -->        10.0.0.1  [ICMP]
+   10.0.0.1 -->        10.0.0.3  [ICMP]
+   10.0.0.3 -->        10.0.0.1  [ICMP]
+   10.0.0.1 -->        10.0.0.3  [ICMP]
+   10.0.0.3 -->        10.0.0.1  [ICMP]
+   10.0.0.1 -->        10.0.0.3  [ICMP]
+   10.0.0.3 -->        10.0.0.1  [ICMP]
+   10.0.0.1 -->        10.0.0.3  [ICMP]
+   10.0.0.3 -->        10.0.0.1  [ICMP]
+   ...
+   ```
+   
+3. Run `sudo ovs-ofctl dump-flows s1` int terminal to check the flows table in switch
+
+    ```
+    peng@peng-virtual-machine:~$ sudo ovs-ofctl dump-flows s1
+    NXST_FLOW reply (xid=0x4):
+     cookie=0x0, duration=9.825s, table=0, n_packets=8, n_bytes=784, idle_timeout=20, idle_age=1, priority=1,ip,in_port=1,dl_src=00:00:00:00:00:01,dl_dst=00:00:00:00:00:03 actions=output:3
+     cookie=0x0, duration=9.825s, table=0, n_packets=7, n_bytes=686, idle_timeout=20, idle_age=0, priority=1,ip,in_port=3,dl_src=00:00:00:00:00:03,dl_dst=00:00:00:00:00:01 actions=output:1
+     cookie=0x0, duration=209.230s, table=0, n_packets=57, n_bytes=6431, idle_age=4, priority=0 actions=CONTROLLER:65535
+    peng@peng-virtual-machine:~$ sudo ovs-ofctl dump-flows s2
+    NXST_FLOW reply (xid=0x4):
+     cookie=0x0, duration=11.232s, table=0, n_packets=8, n_bytes=784, idle_timeout=20, idle_age=3, priority=1,ip,in_port=2,dl_src=00:00:00:00:00:01,dl_dst=00:00:00:00:00:03 actions=output:1
+     cookie=0x0, duration=11.228s, table=0, n_packets=8, n_bytes=784, idle_timeout=20, idle_age=2, priority=1,ip,in_port=1,dl_src=00:00:00:00:00:01,dl_dst=00:00:00:00:00:03 actions=output:3
+     cookie=0x0, duration=11.228s, table=0, n_packets=8, n_bytes=784, idle_timeout=20, idle_age=2, priority=1,ip,in_port=3,dl_src=00:00:00:00:00:03,dl_dst=00:00:00:00:00:01 actions=output:1
+     cookie=0x0, duration=11.228s, table=0, n_packets=8, n_bytes=784, idle_timeout=20, idle_age=1, priority=1,ip,in_port=1,dl_src=00:00:00:00:00:03,dl_dst=00:00:00:00:00:01 actions=output:2
+     cookie=0x0, duration=210.640s, table=0, n_packets=87, n_bytes=10534, idle_age=6, priority=0 actions=CONTROLLER:65535
+    peng@peng-virtual-machine:~$ sudo ovs-ofctl dump-flows s3
+    NXST_FLOW reply (xid=0x4):
+     cookie=0x0, duration=12.783s, table=0, n_packets=8, n_bytes=784, idle_timeout=20, idle_age=3, priority=1,ip,in_port=2,dl_src=00:00:00:00:00:01,dl_dst=00:00:00:00:00:03 actions=output:1
+     cookie=0x0, duration=12.783s, table=0, n_packets=8, n_bytes=784, idle_timeout=20, idle_age=3, priority=1,ip,in_port=1,dl_src=00:00:00:00:00:03,dl_dst=00:00:00:00:00:01 actions=output:2
+     cookie=0x0, duration=212.208s, table=0, n_packets=48, n_bytes=5649, idle_age=7, priority=0 actions=CONTROLLER:65535
+     ```
   
   
