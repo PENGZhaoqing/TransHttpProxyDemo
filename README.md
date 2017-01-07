@@ -29,6 +29,13 @@ Transparent HTTP Proxy App developed by Floodlight
   2017-01-07 10:58:22.63 INFO  [n.f.c.i.OFSwitchManager] Setting 0x1 as the default max tables to receive table-miss flow
   2017-01-07 10:58:22.124 INFO  [n.f.c.i.OFSwitchManager] OpenFlow version OF_15 will be advertised to switches. Supported fallback versions [OF_10, OF_11, OF_12, OF_13, OF_14, OF_15]
   2017-01-07 10:58:22.125 INFO  [n.f.c.i.OFSwitchManager] Listening for OpenFlow switches on [0.0.0.0]:6653
-  ```
+  ...
   
- 2.   
+  ```
+
+2. Run `sudo ./run.py` and it will do following things as ordered for us: 
+
+  1. Trying to connect to the controller with socket (localhost,port=6653), and waiting until success
+  2. Launching Mininet and creating the whole virtual network with specified topological structure including Open vswitch and hosts
+  3. compile the proxy.c and run the compiled proxy
+  
