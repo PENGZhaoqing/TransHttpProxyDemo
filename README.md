@@ -107,7 +107,7 @@ Transparent HTTP Proxy App developed by Floodlight
   mininet> exit
   ```
  
-  2. Cat the proxy.log, we can find the prox host receive the packages from other hosts and then simply sends out all packets it receives on the same port
+2. Cat the proxy.log, we can find the prox host receive the packages from other hosts and then simply sends out all packets it receives on the same port
   
    ```
    10.0.0.1 -->        10.0.0.3  [ICMP]
