@@ -1,7 +1,6 @@
 # TransHttpProxyDemo
 
-### [中文教程1](http://blog.csdn.net/ppp8300885/article/details/54136834) 
-### [中文教程2](http://blog.csdn.net/ppp8300885/article/details/54193708)
+### [中文教程1](http://blog.csdn.net/ppp8300885/article/details/54136834)  [中文教程2](http://blog.csdn.net/ppp8300885/article/details/54193708)
 
 Transparent HTTP Proxy App developed by Floodlight
 
